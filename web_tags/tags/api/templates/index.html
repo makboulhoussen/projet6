@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+	<title>Ask a Question - Stack Overflow</title>
+	<script type=text/javascript src="{{url_for('static', filename='jquery-3.3.1.min.js') }}"></script>
+
+</head>
+
+<body>
+	<header class="top-bar">
+	    <div class="-container">
+	        <div class="-main">
+	        	<a href="https://stackoverflow.com">
+	        		<span class="-logo">stack overflow </span>
+
+	            </a>
+	        </div>
+	    </div>
+	</header>
+
+
+	<div class="container">
+		<h1 class="title">Ask a question - Stack Overflow</h1>
+		<div class="form-item">
+			<form action = "/suggestTags" method="POST">
+				<table class="ask-table">
+					<tbody><tr>
+						<td class="ask-key" ><label>Title</label></td>
+						<td >
+							<input id="title" name="title" type="text" required="required" maxlength="300" placeholder="What's your programming question? Be specific." class="js-ask-title" value="" data-min-length="15" data-max-length="150" autocomplete="off">
+	                    </td>
+	                    </tr>
+	                </tbody></table>
+
+	                <table class="ask-table">
+					<tbody><tr>
+						<td class="ask-key" ><label>Text</label></td>
+						<td >
+							<textarea id="body_text" class="post" name="body_text" rows="10" required="required"></textarea>
+	                    </td>
+	                    </tr>
+	                </tbody></table>
+	                <table class="ask-table">
+					<tbody><tr>
+						<td class="ask-key" ><label>Code</label></td>
+						<td >
+							<textarea id="body_code" class="post" name="body_code" rows="6"></textarea>
+	                    </td>
+	                    </tr>
+	                </tbody></table>
+	                
+	                <div id="wmd-preview" class="wmd-preview"></div>
+	                <div style="padding-top: 30px"></div>
+	                <div>
+	                	<span class="tag_label">Tags</span><span id="result"></span>
+	                </div>
+	                <p>
+	                	<button id="tags-submit" class="btn" type="submit" tabindex="120" autocomplete="off">
+	                        Suggest Tags
+	                    </button>
+	                     
+	                </p>
+	        </form>
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript">
+		$(function() {
+    		$('#tags-submit').bind('click', function() {
+    			var title = $('#title').val();
+    			var body_text = $('#body_text').val();
+    			var body_code = $('#body_code').val();
+    			var data = {
+                	"title" : title,
+                	"body_text" : body_text,
+                	"body_code" : body_code
+            	}
+                $.ajax({
+                	type: "POST",
+                	url: "/suggestTags",
+                	data: data,
+                	success: function(msg){
+                		result=""
+                		$.each(msg, function (index, value) {
+                			result = result + '<span class="post-tags">' + value + '</span>'
+        					console.log(value);
+   						 });
+                		$("#result").html(result);
+  					},
+  					error: function(XMLHttpRequest, textStatus, errorThrown) {
+     					alert("Error : " + errorThrown);
+  					}
+				});
+                return false;
+   			 });
+		});
+    </script>
+
+</body>
+</html>
