@@ -1,1 +1,1 @@
-web: gunicorn delayapi:app
+web: gunicorn tags.api:app
