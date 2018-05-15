@@ -13,7 +13,9 @@ def init(model_file='./data/tags_SGDClassifier.pkl', multiLabelBin_file = './dat
     num_tags = ntags
     texpP = Text_Processor()
 
-
+'''
+Retourne une liste de 5 tags les plus pertinents par rapport à la question
+'''
 def suggest_tags(title, body_text, body_code=''):
 	text_data = texpP.getProcessedText(title, body_text, body_code)
 	predictions = predictionModel.predict_proba([text_data])
