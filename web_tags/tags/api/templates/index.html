@@ -20,11 +20,43 @@
 	    </div>
 	</header>
 
+	<script type="text/javascript">
+		$(document).ready(function(){ $("#form").on("submit", function(e){
+			e.preventDefault() 
+			var title = $('#title').val();
+    		var body_text = $('#body_text').val();
+    		var body_code = $('#body_code').val();
+    		var data = {
+                	"title" : title,
+                	"body_text" : body_text,
+                	"body_code" : body_code
+            }
+            $.ajax({
+                	type: "POST",
+                	url: "/suggestTags",
+                	data: data,
+                	success: function(msg){
+                		result=""
+                		$.each(msg, function (index, value) {
+                			result = result + '<span class="post-tags">' + value + '</span>'
+        					console.log(value);
+   						 });
+                		$("#result").html(result);
+  					},
+  					error: function(XMLHttpRequest, textStatus, errorThrown) {
+     					alert("Error : " + errorThrown);
+  					}
+				});
+                return false;
+   			 });
+	});
+</script>
+
 
 	<div class="container">
 		<h1 class="title">Ask a question - Stack Overflow</h1>
 		<div class="form-item">
-			<form action = "/suggestTags" method="POST">
+			<form id="form" method="POST">
 				<table class="ask-table">
 					<tbody><tr>
 						<td class="ask-key" ><label>Title</label></td>
@@ -57,20 +89,22 @@
 	                	<span class="tag_label">Tags</span><span id="result"></span>
 	                </div>
 	                <p>
-	                	<button id="tags-submit" class="btn" type="submit" tabindex="120" autocomplete="off">
+	                	<button id="tsubmit" class="btn" type="submit" tabindex="120" autocomplete="off">
 	                        Suggest Tags
 	                    </button>
 	                     
 	                </p>
-	        </form>
+	       </form>
 		</div>
 	</div>
 
 
 
+<!--
 	<script type="text/javascript">
 		$(function() {
     		$('#tags-submit').bind('click', function() {
+    			alert('coco')
     			var title = $('#title').val();
     			var body_text = $('#body_text').val();
     			var body_code = $('#body_code').val();
@@ -99,6 +133,7 @@
    			 });
 		});
     </script>
+-->
 
 </body>
 </html>
