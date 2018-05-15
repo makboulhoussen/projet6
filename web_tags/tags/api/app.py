@@ -19,9 +19,7 @@ def get_tags_suggestion():
 	        body_text = result['body_text']
 	        body_code = result['body_code']
 	        tags = tagsSuggestion.suggest_tags(title, body_text, body_code)
-	        print(jsonify(tags[0]))
 	        return jsonify(tags[0])
-	        #return ' '.join(t for t in tags[0])
 	except Exception as e:
 		print(e)
 		return("Error : ", str(e))

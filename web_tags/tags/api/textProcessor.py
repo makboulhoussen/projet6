@@ -1,6 +1,7 @@
 import unicodedata
 import re
 import string
+import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from nltk.tokenize.toktok import ToktokTokenizer
@@ -9,6 +10,7 @@ from .contractions import CONTRACTION_MAP
 class Text_Processor :
 
 	def __init__(self):
+		nltk.data.path.append('/app/tags/api/nltk_data')
 		self.stopword_list = set(stopwords.words('english'))
 		self.tokenizer = ToktokTokenizer()
 

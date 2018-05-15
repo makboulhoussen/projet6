@@ -115,6 +115,15 @@ padding-top: 5px;
     border: 1px solid #c8ccd0;
 }
 
+.post-code {
+    width: 598px;
+    padding: 8px 10px;
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+    background-color: #fcfcfc;
+    font-size: 12px;
+    border: 1px solid #c8ccd0;
+}
+
 .js-ask-title {
     padding: 8px 10px;
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
