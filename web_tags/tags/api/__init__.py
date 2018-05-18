@@ -6,7 +6,7 @@ import logging as lg
 ## VARIABLES
 model_file='./data/tags_SGDClassifier.pkl'
 multiLabelBin_file = './data/tags_multiLabelBin.pkl'
-number_tags = 5
+number_tags = 7
 
 
 log = lg.getLogger('werkzeug')
